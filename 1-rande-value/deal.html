@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr = [undefined,null,NaN,"",0,"字符串",1,2,3]
+
+        // object.defineProperty
+        Object.defineProperty(window,'newArr',{
+            get(){
+                return arr.map(value=> value || value === 0 ? value:'-');
+            }
+        })
+        // proxy
+        var obj = new Proxy(arr,{
+            get(target, key, receive){
+                return target.map(value=> value || value === 0 ? value:'-')
+            }
+        })
+        console.log("原始数据")
+        console.log(arr)
+        console.log("Object.defineProperty方法")
+        console.log(newArr)
+        console.log("proxy方法")
+        console.log(obj.arr)
+    </script><!--  -->
+</body>
+</html>
